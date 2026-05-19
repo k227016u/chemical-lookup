@@ -31,7 +31,6 @@
     padding: 2rem;
   }
 
-  /* 背景グリッド */
   body::before {
     content: '';
     position: fixed;
@@ -46,14 +45,12 @@
 
   .container {
     width: 100%;
-    max-width: 540px;
+    max-width: 580px;
     position: relative;
     z-index: 1;
   }
 
-  header {
-    margin-bottom: 2.5rem;
-  }
+  header { margin-bottom: 2.5rem; }
 
   .label-tag {
     font-family: 'DM Mono', monospace;
@@ -68,18 +65,14 @@
     font-size: 2rem;
     font-weight: 300;
     letter-spacing: -0.02em;
-    line-height: 1.2;
   }
 
-  h1 span {
-    color: var(--accent);
-  }
+  h1 span { color: var(--accent); }
 
   .subtitle {
     margin-top: 0.5rem;
     color: var(--muted);
     font-size: 0.9rem;
-    font-weight: 300;
   }
 
   .card {
@@ -90,17 +83,6 @@
     margin-bottom: 1rem;
   }
 
-  .input-group {
-    display: flex;
-    gap: 0.75rem;
-    align-items: stretch;
-  }
-
-  .input-wrapper {
-    flex: 1;
-    position: relative;
-  }
-
   .input-hint {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -108,18 +90,31 @@
     margin-bottom: 0.5rem;
   }
 
+  .row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
   input[type="number"] {
-    width: 100%;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.875rem 1rem;
     color: var(--text);
     font-family: 'DM Mono', monospace;
-    font-size: 1.1rem;
+    font-size: 1rem;
     outline: none;
     transition: border-color 0.2s;
     -moz-appearance: textfield;
+    width: 100%;
   }
 
   input[type="number"]::-webkit-outer-spin-button,
@@ -130,25 +125,60 @@
     box-shadow: 0 0 0 3px rgba(88,166,255,0.1);
   }
 
+  .toggle-group {
+    display: flex;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .toggle-group label {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+  }
+
+  .toggle-group input[type="radio"] { display: none; }
+
+  .toggle-group input[type="radio"]:checked + label {
+    background: var(--accent);
+    color: #0d1117;
+    font-weight: 500;
+  }
+
   button {
     background: var(--accent);
     color: #0d1117;
     border: none;
     border-radius: 8px;
-    padding: 0 1.5rem;
+    padding: 0.875rem 1.5rem;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     transition: opacity 0.15s, transform 0.1s;
-    white-space: nowrap;
-    margin-top: 1.35rem;
+    width: 100%;
   }
 
   button:hover { opacity: 0.85; }
-  button:active { transform: scale(0.97); }
+  button:active { transform: scale(0.98); }
 
-  /* 結果表示 */
+  .error-msg {
+    color: #f85149;
+    font-size: 0.875rem;
+    display: none;
+    margin-top: 0.5rem;
+  }
+
+  .error-msg.visible { display: block; }
+
   .result-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -174,49 +204,47 @@
     margin-bottom: 0.75rem;
   }
 
-  .compound-name {
-    font-size: 1.8rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
+  .no-result {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem 0;
   }
 
-  .meta-row {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
   }
 
-  .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .meta-key {
+  .result-table th {
+    text-align: left;
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    padding: 0 0 0.5rem 0;
+    border-bottom: 1px solid var(--border);
   }
 
-  .meta-val {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.95rem;
+  .result-table td {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
     color: var(--text);
   }
 
+  .result-table tr:last-child td { border-bottom: none; }
+
   .diff-badge {
     display: inline-block;
-    background: rgba(210,153,34,0.15);
-    border: 1px solid rgba(210,153,34,0.3);
-    color: var(--warn);
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 4px;
-    margin-top: 4px;
+    background: rgba(210,153,34,0.15);
+    border: 1px solid rgba(210,153,34,0.3);
+    color: var(--warn);
   }
 
   .diff-badge.exact {
@@ -225,14 +253,12 @@
     color: var(--accent2);
   }
 
-  .error-msg {
-    color: #f85149;
-    font-size: 0.875rem;
-    display: none;
-    margin-top: 0.5rem;
+  .count-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
   }
-
-  .error-msg.visible { display: block; }
 
   footer {
     margin-top: 2rem;
@@ -249,48 +275,53 @@
   <header>
     <div class="label-tag">// analytical chemistry</div>
     <h1>Chemical <span>Lookup</span></h1>
-    <p class="subtitle">数値を入力して最も近い化合物を検索する</p>
+    <p class="subtitle">数値と許容範囲を入力して化合物を検索する</p>
   </header>
 
   <div class="card">
-    <div class="input-hint">value (e.g. wavelength, mass)</div>
-    <div class="input-group">
-      <div class="input-wrapper">
-        <input type="number" id="valueInput" placeholder="例: 300" step="any" autofocus>
+    <div class="row">
+      <div class="field">
+        <div class="input-hint">value（波長・質量など）</div>
+        <input type="number" id="valueInput" placeholder="例: 300" step="any">
       </div>
-      <button onclick="doSearch()">Search</button>
+      <div class="field">
+        <div class="input-hint">許容範囲</div>
+        <input type="number" id="toleranceInput" placeholder="例: 10" step="any" min="0">
+      </div>
     </div>
+
+    <div class="toggle-group">
+      <input type="radio" name="tolType" id="abs" value="absolute" checked>
+      <label for="abs">絶対値（± 数値）</label>
+      <input type="radio" name="tolType" id="rel" value="relative">
+      <label for="rel">相対値（± %）</label>
+    </div>
+
+    <button onclick="doSearch()">Search</button>
     <div class="error-msg" id="errorMsg"></div>
   </div>
 
   <div class="result-card" id="resultCard">
-    <div class="result-label">// match found</div>
-    <div class="compound-name" id="compoundName">—</div>
-    <div class="meta-row">
-      <div class="meta-item">
-        <span class="meta-key">入力値</span>
-        <span class="meta-val" id="inputVal">—</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-key">一致した値</span>
-        <span class="meta-val" id="matchedVal">—</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-key">差分</span>
-        <span class="diff-badge" id="diffBadge">—</span>
-      </div>
-    </div>
+    <div class="result-label">// results</div>
+    <div class="count-label" id="countLabel"></div>
+    <div id="resultBody"></div>
   </div>
 
   <footer>chemical-lookup · powered by Flask + Render</footer>
 </div>
 
 <script>
-  const input = document.getElementById('valueInput');
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  const valueInput = document.getElementById('valueInput');
+  const toleranceInput = document.getElementById('toleranceInput');
+
+  [valueInput, toleranceInput].forEach(el => {
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  });
 
   async function doSearch() {
-    const val = input.value.trim();
+    const val = valueInput.value.trim();
+    const tol = toleranceInput.value.trim();
+    const tolType = document.querySelector('input[name="tolType"]:checked').value;
     const errEl = document.getElementById('errorMsg');
     const resultCard = document.getElementById('resultCard');
 
@@ -306,7 +337,7 @@
     const res = await fetch('/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ value: val })
+      body: JSON.stringify({ value: val, tolerance: tol || 0, tolerance_type: tolType })
     });
 
     const data = await res.json();
@@ -317,13 +348,37 @@
       return;
     }
 
-    document.getElementById('compoundName').textContent = data.compound;
-    document.getElementById('inputVal').textContent = data.input;
-    document.getElementById('matchedVal').textContent = data.matched_value;
+    const unit = tolType === 'absolute' ? '' : '%';
+    document.getElementById('countLabel').textContent =
+      `入力値: ${data.input}　許容範囲: ±${data.tolerance}${unit}　該当: ${data.count}件`;
 
-    const badge = document.getElementById('diffBadge');
-    badge.textContent = data.difference === 0 ? '± 0 (完全一致)' : `± ${data.difference}`;
-    badge.className = 'diff-badge' + (data.difference === 0 ? ' exact' : '');
+    const body = document.getElementById('resultBody');
+
+    if (data.count === 0) {
+      body.innerHTML = '<div class="no-result">該当する化合物が見つかりませんでした</div>';
+    } else {
+      const rows = data.results.map(r => {
+        const badgeClass = r.difference === 0 ? 'diff-badge exact' : 'diff-badge';
+        const diffText = r.difference === 0 ? '完全一致' : `± ${r.difference}`;
+        return `<tr>
+          <td>${r.compound}</td>
+          <td>${r.matched_value}</td>
+          <td><span class="${badgeClass}">${diffText}</span></td>
+        </tr>`;
+      }).join('');
+
+      body.innerHTML = `
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>化合物名</th>
+              <th>登録値</th>
+              <th>差分</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
 
     resultCard.classList.add('visible');
   }
